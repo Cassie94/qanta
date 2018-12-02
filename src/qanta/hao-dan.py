@@ -22,10 +22,10 @@ DAN_DEFAULT_CONFIG = {
     'ebd_dim': 300,
     'n_hidden_units': 150,
     #########
-    'n_epochs': 1,
-    'batch_size': 64,
-    'lr': 1e-3,
-    'log': 500,
+    'n_epochs': 5,
+    'batch_size': 256,
+    'lr': 2e-3,
+    'log': 100,
     'cuda': False,
     'pretrained_word_ebd': True
 }
@@ -255,7 +255,7 @@ class DanGuesser:
 
                 if (idx + 1) % cfg['log'] == 0:
                     print_loss_avg /= cfg['log']
-                    print('epoch %d/%d, iter %d/%d: ~train_loss = %.5f' % \
+                    print('epoch %d/%d, iter %d/%d: train_loss = %.5f' % \
                           (epoch + 1 + last_epoch, cfg['n_epochs'] + last_epoch,
                           idx + 1, len(train_loader), print_loss_avg),
                           flush=True)
