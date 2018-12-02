@@ -124,6 +124,7 @@ def get_answer_batch(url, questions, char_step_size, batch_size):
                 query['questions'].append(
                     get_question_query(qids[i], q, char_idx))
             resp = requests.post(url, json=query).json()
+            # resp = requests.get(url).json()
             for i, r in enumerate(resp):
                 q = query['questions'][i]
                 q.update(r)

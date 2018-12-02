@@ -11,7 +11,8 @@ from flask import Flask, jsonify, request
 
 from qanta import util
 from qanta.dataset import QuizBowlDataset
-
+from IPython import embed
+import pdb
 
 MODEL_PATH = 'tfidf.pickle'
 BUZZ_NUM_GUESSES = 10
@@ -60,6 +61,7 @@ class TfidfGuesser:
             ngram_range=(1, 3), min_df=2, max_df=.9
         ).fit(x_array)
         self.tfidf_matrix = self.tfidf_vectorizer.transform(x_array)
+        pdb.set_trace()
 
     def guess(self, questions: List[str], max_n_guesses: Optional[int]) -> List[List[Tuple[str, float]]]:
         representations = self.tfidf_vectorizer.transform(questions)
@@ -69,6 +71,7 @@ class TfidfGuesser:
         for i in range(len(questions)):
             idxs = guess_indices[i]
             guesses.append([(self.i_to_ans[j], guess_matrix[i, j]) for j in idxs])
+            # guesses.append([(guesser.i_to_ans[j], guess_matrix[i, j]) for j in idxs])
 
         return guesses
 

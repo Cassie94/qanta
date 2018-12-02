@@ -3,6 +3,7 @@ import os
 import json
 
 from qanta.util import QANTA_MAPPED_DATASET_PATH
+# from util import QANTA_MAPPED_DATASET_PATH
 
 GUESSER_TRAIN_FOLD = 'guesstrain'
 BUZZER_TRAIN_FOLD = 'buzztrain'
@@ -136,6 +137,21 @@ class QuizBowlDataset:
             training_pages.append(q.page)
 
         return training_examples, training_pages, None
+
+    def dev_data(self):
+        dev_examples = []
+        dev_pages = []
+        questions = []
+        if self.guesser_train:
+            questions.extend(self.db.guess_dev_questions)
+        if self.buzzer_train:
+            questions.extend(self.db.buzz_dev_questions)
+
+        for q in questions:
+            dev_examples.append(q.sentences)
+            dev_pages.append(q.page)
+
+        return dev_examples, dev_pages, None
 
     def questions_by_fold(self):
         return {

@@ -1,4 +1,6 @@
 #/usr/bin/env bash
+#pip install gensim
 
-python -m qanta.danbase $@
+#python -m qanta.tag $@
+python -m qanta.hao-dan $@
 #python -m qanta.tfidf $@

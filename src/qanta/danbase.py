@@ -4,7 +4,7 @@ import pickle
 import json
 import nltk
 from os import path
-# import gensim
+import gensim
 import pdb
 from IPython import embed
 import click
